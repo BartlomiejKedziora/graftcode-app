@@ -1,0 +1,23 @@
+services:
+  gg:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: graftcode-gateway
+    ports:
+      - "8080:80"
+      - "8081:81"
+    volumes:
+      - ./src:/usr/app/src
+    working_dir: /usr/app
+    command:
+      - gg
+      - --runtime
+      - nodejs
+      - --modules
+      - src/backend
+      - --port
+      - "80"
+      - --httpPort
+      - "81"
